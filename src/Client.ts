@@ -1,11 +1,29 @@
+import Config from './ressources/Config'
 export default class Client {
   baseUrl: string;
 
   token: string | undefined;
 
+  Config = new Config();
+
   constructor(baseUrl = 'https://shadedoes3d.com/api', token = '') {
     this.baseUrl = baseUrl;
     this.token = token;
+  }
+
+  async getConfig() {
+
+    return fetch(`${this.baseUrl}/config`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(async (response) => {
+        if (response.ok) {
+
+        }
+      });
   }
 
   /* eslint @typescript-eslint/no-unsafe-return: "off" */
