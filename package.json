@@ -1,6 +1,6 @@
 {
-  "name": "sda-sdk",
-  "version": "1.0.0",
+  "name": "@aottr/sda-sdk",
+  "version": "1.0.4",
   "description": "JavaScript SDK for shadedoes3d.com Awtter API",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
