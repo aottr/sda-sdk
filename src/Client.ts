@@ -1,4 +1,7 @@
-import Config from './ressources/Config'
+import Config from './ressources/Config';
+import { SuccessResponse, ErrorResponse } from './schemas/facileApi';
+import ConfigSchema from './schemas/ConfigSchema';
+
 export default class Client {
   baseUrl: string;
 
@@ -11,33 +14,25 @@ export default class Client {
     this.token = token;
   }
 
-  async getConfig() {
-
+  async getConfig(): Promise<ConfigSchema> {
     return fetch(`${this.baseUrl}/config`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     })
       .then(async (response) => {
         if (response.ok) {
-
+          const resp = await response.json() as SuccessResponse;
+          return resp.data;
         }
+        const resp = await response.json() as ErrorResponse;
+        throw new Error(resp.message);
       });
   }
 
   /* eslint @typescript-eslint/no-unsafe-return: "off" */
   async getToken(username: string, password: string): Promise<string | null> {
-    interface ErrorResponse {
-      status: string;
-      message: string;
-    }
-
-    interface SuccessResponse {
-      status: string;
-      data: any;
-    }
-
     const config = {
       method: 'POST',
       headers: {
