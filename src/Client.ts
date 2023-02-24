@@ -1,17 +1,19 @@
-import Config from './ressources/Config';
 import { SuccessResponse, ErrorResponse } from './schemas/facileApi';
 import ConfigSchema from './schemas/ConfigSchema';
+import { Users } from './ressources';
 
 export default class Client {
   baseUrl: string;
 
   token: string | undefined;
 
-  Config = new Config();
+  Users: Users;
 
   constructor(baseUrl = 'https://shadedoes3d.com/api', token = '') {
     this.baseUrl = baseUrl;
     this.token = token;
+
+    this.Users = new Users(this);
   }
 
   async getConfig(): Promise<ConfigSchema> {
