@@ -14,7 +14,7 @@ export default class Users extends BaseRessource {
       .then(async (response) => {
         if (response.ok) {
           const resp = await response.json() as SuccessResponse;
-          return resp;
+          return resp.data as Array<UserSchema>;
         }
         const resp = await response.json() as ErrorResponse;
         throw new Error(resp.message);
@@ -32,7 +32,7 @@ export default class Users extends BaseRessource {
       .then(async (response) => {
         if (response.ok) {
           const resp = await response.json() as SuccessResponse;
-          return resp.data;
+          return resp.data as UserSchema;
         }
         const resp = await response.json() as ErrorResponse;
         throw new Error(resp.message);
