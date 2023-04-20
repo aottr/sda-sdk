@@ -8,5 +8,9 @@ export default interface UserSchema {
     tag: string;
     id: string;
     active: boolean;
-  }
+  };
+  patreon?: {
+    active: boolean;
+    tier?: string;
+  };
 }

@@ -9,5 +9,5 @@ test('Login', async () => {
 
 test('Config', async () => {
   const api = new Client();
-  expect((await api.getConfig()).apiVersion).toEqual('1.5.2');
+  expect((await api.getConfig()).apiVersion).toEqual('1.5.3');
 })
