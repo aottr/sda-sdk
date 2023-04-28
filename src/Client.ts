@@ -22,15 +22,14 @@ export default class Client {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          const resp = await response.json() as SuccessResponse;
-          return resp.data;
-        }
-        const resp = await response.json() as ErrorResponse;
-        throw new Error(resp.message);
-      });
+    }).then(async (response) => {
+      if (response.ok) {
+        const resp = (await response.json()) as SuccessResponse;
+        return resp.data;
+      }
+      const resp = (await response.json()) as ErrorResponse;
+      throw new Error(resp.message);
+    });
   }
 
   /* eslint @typescript-eslint/no-unsafe-return: "off" */
@@ -39,7 +38,7 @@ export default class Client {
       method: 'POST',
       headers: {
         /* eslint quote-props: "off" */
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -48,18 +47,15 @@ export default class Client {
       }),
     };
 
-    return fetch(`${this.baseUrl}/auth`, config)
-      .then(async (response) => {
-        try {
-          const resp = await response.json() as SuccessResponse;
-          if (resp.status === 'success') {
-            /* eslint @typescript-eslint/no-unsafe-member-access: "off" */
-            return resp.data.token as string;
-          }
-        } catch (_) {
-          console.log('no');
+    return fetch(`${this.baseUrl}/auth`, config).then(async (response) => {
+      try {
+        const resp = (await response.json()) as SuccessResponse;
+        if (resp.status === 'success') {
+          /* eslint @typescript-eslint/no-unsafe-member-access: "off" */
+          return resp.data.token as string;
         }
-        return null;
-      });
+      } catch (_) { /* empty */ }
+      return null;
+    });
   }
 }

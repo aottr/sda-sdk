@@ -9,9 +9,9 @@ export default interface ConfigSchema {
   awtterSdk?: {
     version: string;
     path: string;
-  }
+  };
   awtterMerger?: {
     version: string;
     path: string;
-  }
+  };
 }
